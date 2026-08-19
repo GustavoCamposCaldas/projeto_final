@@ -1,0 +1,32 @@
+# Conecta Vagas DF - Configuração do Apache
+# Versão 7.0
+
+# Ativar rewrite
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /conecta-vagas-df-7.0/
+</IfModule>
+
+# Página padrão
+DirectoryIndex index.php
+
+# Proteger arquivos sensíveis
+<FilesMatch "\.(env|config|sql|log|ini|md)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Proteger listagem de diretórios
+<IfModule mod_autoindex.c>
+    Options -Indexes
+</IfModule>
+
+# Cache de arquivos estáticos
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+</IfModule>
